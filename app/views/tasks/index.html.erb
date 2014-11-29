@@ -1,0 +1,64 @@
+<h1>Seznam úkolů</h1>
+
+<h2>Nesplněné</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Deadline</th>
+      <th>Done</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr> 
+  </thead>
+
+  <tbody>
+    <% @tasks_undone.each do |task| %>
+      <tr class="<%= 'danger' if task.hours_left < 0 %> <%= 'warning' if task.hours_left < 24 && task.hours_left > 0 %>" >
+        <td><%= task.name %></td>
+        <td><%= task.deadline %></td>
+        <td><%= task.done %></td>
+        <td><%= link_to 'Ukázat', task %></td>
+        <td><%= link_to 'Upravit', edit_task_path(task) %></td>
+        <td><%= link_to 'Smazat', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<h2>Splněné</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Deadline</th>
+      <th>Done</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr> 
+  </thead>
+
+  <tbody>
+    <% @tasks_done.each do |task| %>
+      <tr class="<%= 'danger' if task.hours_left < 0 %> <%= 'warning' if task.hours_left < 24 && task.hours_left > 0 %>" >
+        <td><%= task.name %></td>
+        <td><%= task.deadline %></td>
+        <td><%= task.done %></td>
+        <td><%= link_to 'Ukázat', task %></td>
+        <td><%= link_to 'Upravit', edit_task_path(task) %></td>
+        <td><%= link_to 'Smazat', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br/>
+
+
+
+
+<%= link_to 'Nový úkol', new_task_path %>
